@@ -43,7 +43,7 @@ public class ClienteController {
         return ResponseEntity.ok(cliente1);
     }
 
-    @PostMapping("/{id}") // metodo de actualizado
+    @PutMapping("/{id}") // metodo de actualizado
     public ResponseEntity<Cliente> update(@PathVariable int id, @RequestBody Cliente cliente){
         Cliente clienteActualizado = clienteService.update(id, cliente);
 

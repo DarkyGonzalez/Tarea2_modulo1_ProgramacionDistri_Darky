@@ -31,15 +31,18 @@ public class ClienteServiceImpl implements ClienteService{
 
     @Override
     public Cliente update(int id, Cliente cliente) {
-        Optional<Cliente> cliente2 = clienteRepository.findById(id);
-        cliente2.orElse(null).setCedula(cliente.getCedula());
-        cliente2.orElse(null).setNombre(cliente.getNombre());
-        cliente2.orElse(null).setApellido(cliente.getApellido());
-        cliente2.orElse(null).setDireccion(cliente.getDireccion());
-        cliente2.orElse(null).setTelefono(cliente.getTelefono());
-        cliente2.orElse(null).setCorreo(cliente.getCorreo());
-
-        return clienteRepository.save(cliente2.orElse(null));
+        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
+        if (clienteOptional.isPresent()) {
+            Cliente clienteExistente = clienteOptional.get();
+            clienteExistente.setCedula(cliente.getCedula());
+            clienteExistente.setNombre(cliente.getNombre());
+            clienteExistente.setApellido(cliente.getApellido());
+            clienteExistente.setDireccion(cliente.getDireccion());
+            clienteExistente.setTelefono(cliente.getTelefono());
+            clienteExistente.setCorreo(cliente.getCorreo());
+            return clienteRepository.save(clienteExistente);
+        }
+        return null;
     }
 
     @Override

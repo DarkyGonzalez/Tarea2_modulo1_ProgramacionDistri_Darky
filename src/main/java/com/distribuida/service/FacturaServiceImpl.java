@@ -31,17 +31,18 @@ public class FacturaServiceImpl implements FacturaService{
 
     @Override
     public Factura update(int id, Factura factura) {
-
-        Optional<Factura> factura1 = facturaRepository.findById(id);
-
-        factura1.orElse(null).setNumFactura(factura.getNumFactura());
-        factura1.orElse(null).setFecha(factura.getFecha());
-        factura1.orElse(null).setTotalNeto(factura.getTotalNeto());
-        factura1.orElse(null).setIva(factura.getIva());
-        factura1.orElse(null).setTotal(factura.getTotal());
-        factura1.orElse(null).setCliente(factura.getCliente());
-
-        return facturaRepository.save(factura1.orElse(null));
+        Optional<Factura> facturaOptional = facturaRepository.findById(id);
+        if (facturaOptional.isPresent()) {
+            Factura facturaExistente = facturaOptional.get();
+            facturaExistente.setNumFactura(factura.getNumFactura());
+            facturaExistente.setFecha(factura.getFecha());
+            facturaExistente.setTotalNeto(factura.getTotalNeto());
+            facturaExistente.setIva(factura.getIva());
+            facturaExistente.setTotal(factura.getTotal());
+            facturaExistente.setCliente(factura.getCliente());
+            return facturaRepository.save(facturaExistente);
+        }
+        return null;
     }
 
     @Override
