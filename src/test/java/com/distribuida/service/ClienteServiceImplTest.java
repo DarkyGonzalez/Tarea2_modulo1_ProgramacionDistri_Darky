@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.Null;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.verification.VerificationMode;
 
@@ -19,7 +20,7 @@ import java.util.Optional;
 //import static org.mockito.Mockito.times;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ClienteServiceImplTest {
@@ -103,6 +104,30 @@ public class ClienteServiceImplTest {
         assertEquals("Danny", resultado.getNombre());
         //verity(clienteRepository, times(1)).save(cliente);
 
+    }
+
+    @Test
+    public void testUpdateNoExistente(){
+        Cliente clienteNuevo = new Cliente();
+        when(clienteRepository.findById(999)).thenReturn(Optional.empty());
+        Cliente resultado = clienteService.update(999,clienteNuevo);
+        assertNull(resultado);
+        verify(clienteRepository, never()).save(any());
+
+    }
+
+    @Test
+    public void testDeleteExistente(){
+        when(clienteRepository.existsById(1)).thenReturn(true);
+        clienteService.delete(1);
+        verify(clienteRepository).deleteById(1);
+    }
+
+    @Test
+    public void testDeleteNoExistente (){
+        when(clienteRepository.existsById(999)).thenReturn(false);
+        clienteService.delete(999);
+        verify(clienteRepository, never()).deleteById(anyInt());
     }
 
 
