@@ -1,0 +1,13 @@
+.libros-card {
+  margin: 16px;
+}
+
+.libros-table {
+  width: 100%;
+}
+
+th.mat-header-cell {
+  font-weight: bold;
+  background-color: #1565c0;
+  color: white;
+}
