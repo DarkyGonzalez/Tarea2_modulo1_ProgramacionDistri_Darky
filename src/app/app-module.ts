@@ -20,6 +20,9 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { LibrosListComponent } from './libros/libros-list/libros-list.component';
 import { CarritoListComponent } from './carrito/carrito-list/carrito-list.component';
+import { CategoriasListComponent } from './categorias/categorias-list/categorias-list.component';
+import { AutoresListComponent } from './autores/autores-list/autores-list.component';
+import { ClientesListComponent } from './clientes/clientes-list/clientes-list.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
@@ -28,7 +31,10 @@ import { CommonModule } from '@angular/common';
   declarations: [
     App,
     LibrosListComponent,
-    CarritoListComponent
+    CarritoListComponent,
+    CategoriasListComponent,
+    AutoresListComponent,
+    ClientesListComponent
   ],
   imports: [
     BrowserModule,

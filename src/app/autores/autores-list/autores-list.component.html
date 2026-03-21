@@ -1,0 +1,39 @@
+<div class="list-container">
+  <mat-toolbar color="accent" class="list-header">
+    <mat-icon>person</mat-icon>
+    <span class="toolbar-title">Autores</span>
+  </mat-toolbar>
+
+  <mat-card>
+    <mat-card-content>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z2 full-width">
+        <ng-container matColumnDef="idAutor">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let a">{{ a.idAutor }}</td>
+        </ng-container>
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let a">{{ a.nombre }}</td>
+        </ng-container>
+        <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef>Apellido</th>
+          <td mat-cell *matCellDef="let a">{{ a.apellido }}</td>
+        </ng-container>
+        <ng-container matColumnDef="pais">
+          <th mat-header-cell *matHeaderCellDef>País</th>
+          <td mat-cell *matCellDef="let a">{{ a.pais }}</td>
+        </ng-container>
+        <ng-container matColumnDef="correo">
+          <th mat-header-cell *matHeaderCellDef>Correo</th>
+          <td mat-cell *matCellDef="let a">{{ a.correo }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="5" style="text-align:center;padding:20px">Sin registros</td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>
