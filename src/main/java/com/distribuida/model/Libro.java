@@ -17,7 +17,7 @@ public class Libro {
     @Column(name = "editorial")
     private String editorial;
     @Column(name = "num_pagina")
-    private int numPagina;
+    private Integer numPagina;
     @Column(name = "edicion")
     private String edicion;
     @Column(name = "idioma")
@@ -31,7 +31,7 @@ public class Libro {
     @Column(name = "isbn")
     private String isbn;
     @Column(name = "num_ejemplares")
-    private int numEjemplares;
+    private Integer numEjemplares;
     @Column(name = "portada")
     private String portada;
     @Column(name = "presentacion")
@@ -52,7 +52,7 @@ public class Libro {
 
     //Constructor con parámetros (metodo inyector por constructor)
 
-    public Libro(int idLibro, String titulo, String editorial, int numPagina, String edicion, String idioma, Date fechaPublicacion, String descripcion, String tipoPasta, String isbn, int numEjemplares, String portada, String presentacion, Double precio, Categoria categoria, Autor autor) {
+    public Libro(int idLibro, String titulo, String editorial, Integer numPagina, String edicion, String idioma, Date fechaPublicacion, String descripcion, String tipoPasta, String isbn, Integer numEjemplares, String portada, String presentacion, Double precio, Categoria categoria, Autor autor) {
         this.idLibro = idLibro;
         this.titulo = titulo;
         this.editorial = editorial;
@@ -97,11 +97,11 @@ public class Libro {
         this.editorial = editorial;
     }
 
-    public int getNumPagina() {
+    public Integer getNumPagina() {
         return numPagina;
     }
 
-    public void setNumPagina(int numPagina) {
+    public void setNumPagina(Integer numPagina) {
         this.numPagina = numPagina;
     }
 
@@ -153,11 +153,11 @@ public class Libro {
         this.isbn = isbn;
     }
 
-    public int getNumEjemplares() {
+    public Integer getNumEjemplares() {
         return numEjemplares;
     }
 
-    public void setNumEjemplares(int numEjemplares) {
+    public void setNumEjemplares(Integer numEjemplares) {
         this.numEjemplares = numEjemplares;
     }
 
