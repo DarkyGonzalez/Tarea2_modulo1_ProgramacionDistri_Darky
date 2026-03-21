@@ -19,11 +19,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { LibrosListComponent } from './libros/libros-list/libros-list.component';
+import { CarritoListComponent } from './carrito/carrito-list/carrito-list.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     App,
-    LibrosListComponent
+    LibrosListComponent,
+    CarritoListComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,10 @@ import { LibrosListComponent } from './libros/libros-list/libros-list.component'
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [App]

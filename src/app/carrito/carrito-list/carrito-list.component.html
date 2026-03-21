@@ -1,0 +1,124 @@
+<div class="carrito-container">
+
+  <!-- Encabezado -->
+  <mat-toolbar color="primary" class="carrito-header">
+    <mat-icon>shopping_cart</mat-icon>
+    <span class="toolbar-title">Carrito de Compras</span>
+    <span class="spacer"></span>
+    <span *ngIf="carrito" class="cliente-badge">
+      <mat-icon>person</mat-icon> {{ carrito.nombreCliente }}
+    </span>
+  </mat-toolbar>
+
+  <!-- Indicador de carga -->
+  <mat-progress-bar *ngIf="cargando" mode="indeterminate"></mat-progress-bar>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="mensajeError" class="error-msg">{{ mensajeError }}</div>
+
+  <!-- Tabla de ítems -->
+  <mat-card class="carrito-card">
+    <mat-card-content>
+
+      <table mat-table [dataSource]="dataSource" class="carrito-table mat-elevation-z2">
+
+        <!-- Columna: ID Libro -->
+        <ng-container matColumnDef="idLibro">
+          <th mat-header-cell *matHeaderCellDef>#</th>
+          <td mat-cell *matCellDef="let item">{{ item.idLibro }}</td>
+        </ng-container>
+
+        <!-- Columna: Título -->
+        <ng-container matColumnDef="tituloLibro">
+          <th mat-header-cell *matHeaderCellDef>Libro</th>
+          <td mat-cell *matCellDef="let item">{{ item.tituloLibro }}</td>
+        </ng-container>
+
+        <!-- Columna: Cantidad -->
+        <ng-container matColumnDef="cantidad">
+          <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+          <td mat-cell *matCellDef="let item">
+            <div class="cantidad-ctrl">
+              <button mat-icon-button color="warn"
+                      (click)="actualizarCantidad(item, item.cantidad - 1)"
+                      [disabled]="item.cantidad <= 1">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <span class="cantidad-val">{{ item.cantidad }}</span>
+              <button mat-icon-button color="primary"
+                      (click)="actualizarCantidad(item, item.cantidad + 1)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Columna: Precio unitario -->
+        <ng-container matColumnDef="precioUnitario">
+          <th mat-header-cell *matHeaderCellDef>P. Unitario</th>
+          <td mat-cell *matCellDef="let item">${{ item.precioUnitario | number:'1.2-2' }}</td>
+        </ng-container>
+
+        <!-- Columna: Total -->
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef>Total</th>
+          <td mat-cell *matCellDef="let item">${{ item.total | number:'1.2-2' }}</td>
+        </ng-container>
+
+        <!-- Columna: Acciones -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let item">
+            <button mat-icon-button color="warn"
+                    (click)="eliminarItem(item.idCarritoItem)"
+                    matTooltip="Eliminar ítem">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Fila vacía -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell empty-cart" colspan="6">
+            <mat-icon>shopping_cart</mat-icon>
+            <p>El carrito está vacío</p>
+          </td>
+        </tr>
+      </table>
+
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Panel de totales -->
+  <mat-card class="totales-card" *ngIf="carrito">
+    <mat-card-content>
+      <div class="totales-grid">
+        <span>Subtotal:</span>
+        <span>${{ carrito.subtotal | number:'1.2-2' }}</span>
+
+        <span>Descuento:</span>
+        <span>-${{ carrito.descuento | number:'1.2-2' }}</span>
+
+        <span>IVA (15%):</span>
+        <span>${{ carrito.impuestos | number:'1.2-2' }}</span>
+
+        <span class="total-label">TOTAL:</span>
+        <span class="total-valor">${{ carrito.total | number:'1.2-2' }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Botones de acción -->
+  <div class="acciones-footer">
+    <button mat-stroked-button color="warn" (click)="vaciarCarrito()">
+      <mat-icon>delete_sweep</mat-icon> Vaciar Carrito
+    </button>
+    <button mat-raised-button color="primary" (click)="realizarCheckout()">
+      <mat-icon>payment</mat-icon> Realizar Compra
+    </button>
+  </div>
+
+</div>
